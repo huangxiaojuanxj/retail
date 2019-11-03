@@ -1,0 +1,84 @@
+#task1.1
+import pandas as pd
+from pandas import Series, DataFrame
+df=pd.read_csv('C:\泰迪\附件1.csv', encoding='gbk')#读取CSV文件
+print(df.shape)#计算出表格的行列数值
+print(df.columns)#展示表格列的内容
+d=df.loc[df['地点']=='D']#选择表格中“地点”列为D的行
+d.to_csv('task1-1D.csv',encoding='gbk')#存入文件名为task1-1D.csv的表格中
+b=df.loc[df['地点']=='B']#选择表格中“地点”列为B的行
+b.to_csv('task1-1B.csv',encoding='gbk')#存入文件名为task1-1B.csv的表格中
+a=df.loc[df['地点']=='A']#选择表格中“地点”列为A的行
+a.to_csv('task1-1A.csv',encoding='gbk')#存入文件名为task1-1A.csv的表格中
+c=df.loc[df['地点']=='C']#选择表格中“地点”列为C的行
+c.to_csv('task1-1C.csv',encoding='gbk')#存入文件名为task1-1C.csv的表格中
+e=df.loc[df['地点']=='E']#选择表格中“地点”列为E的行
+e.to_csv('task1-1E.csv',encoding='gbk')#存入文件名为task1-1E.csv的表格中
+
+
+#task1.2
+task1-1A['支付时间']=pd.to_datetime(task1-1A['支付时间'])
+data1=task1-1A[(task1-1A['支付时间']>=pd.to_datetime('20170501'))&(task1-1A['支付时间']<=pd.to_datetime('20170531'))]
+task1-1B['支付时间']=pd.to_datetime(T1B['支付时间'])
+data2=task1-1B[(task1-1B['支付时间']>=pd.to_datetime('20170501'))&(task1-1B['支付时间']<=pd.to_datetime('20170531'))]
+task1-1C['支付时间']=pd.to_datetime(task1-1C['支付时间'])
+data3=task1-1C[(task1-1C['支付时间']>=pd.to_datetime('20170501'))&(task1-1C['支付时间']<=pd.to_datetime('20170531'))]
+task1-1D['支付时间']=pd.to_datetime(task1-1D['支付时间'])
+data4=task1-1D[(task1-1D['支付时间']>=pd.to_datetime('20170501'))&(task1-1D['支付时间']<=pd.to_datetime('20170531'))]
+task1-1E['支付时间']=pd.to_datetime(task1-1E['支付时间'])
+data5=task1-1E[(task1-1E['支付时间']>=pd.to_datetime('20170501'))&(task1-1E['支付时间']<=pd.to_datetime('20170531'))]
+print(data1['实际金额'].sum())
+print(data1['实际金额'].count())
+print(data1['实际金额'].mean())
+
+
+#task1.3
+a1 =a[['支付时间', '应付金额', '实际金额']].copy()
+a1['支付时间'] = pd.to_datetime(a1['支付时间'])
+# 将date设置为index
+df1 = a1.set_index('支付时间')
+# 获取某月平均交易额
+print('地点A的售货机每月平均交易额： ')
+print(df1.resample('M').mean())
+#日均订单量
+print('地点A的售货机日均订单量：',len(a1)/len(df1.resample('D')))
+print('--------------------------------------------------')
+b1 =b[['支付时间', '应付金额', '实际金额']].copy()
+b1['支付时间'] = pd.to_datetime(b1['支付时间'])
+# 将date设置为index
+df2 = b1.set_index('支付时间')
+# 获取某月平均交易额
+print('地点B的售货机每月平均交易额：')
+print(df2.resample('M').mean())
+#日均订单量
+print('地点B的售货机日均订单量：',len(a1)/len(df2.resample('D')))
+print('--------------------------------------------------')
+c1 =c[['支付时间', '应付金额', '实际金额']].copy()
+c1['支付时间'] = pd.to_datetime(c1['支付时间'])
+# 将date设置为index
+df3 = c1.set_index('支付时间')
+# 获取某月平均交易额
+print('地点C的售货机每月平均交易额：')
+print(df3.resample('M').mean())
+#日均订单量
+print('地点C的售货机日均订单量：',len(a1)/len(df3.resample('D')))
+print('--------------------------------------------------')
+d1 =d[['支付时间', '应付金额', '实际金额']].copy()
+d1['支付时间'] = pd.to_datetime(d1['支付时间'])
+# 将date设置为index
+df4 = d1.set_index('支付时间')
+# 获取某月平均交易额
+print('地点D的售货机每月平均交易额：')
+print(df4.resample('M').mean())
+#日均订单量
+print('地点D的售货机日均订单量：',len(a1)/len(df4.resample('D')))
+print('--------------------------------------------------')
+e1 =e[['支付时间', '应付金额', '实际金额']].copy()
+e1['支付时间'] = pd.to_datetime(e1['支付时间'])
+# 将date设置为index
+df5 = e1.set_index('支付时间')
+# 获取某月平均交易额
+print('地点E的售货机每月平均交易额：')
+print(df5.resample('M').mean())
+#日均订单量
+print('地点E的售货机日均订单量：',len(a1)/len(df5.resample('D')))
